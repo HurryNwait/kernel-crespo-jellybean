@@ -79,7 +79,7 @@ static struct check_device_op chk_dev_op[] = {
 #define S3C_HSMMC_CLKCON	(0x2c)
 #define S3C_HSMMC_CMD_INHIBIT	0x00000001
 #define S3C_HSMMC_DATA_INHIBIT	0x00000002
-#define S3C_HSMMC_CLOCK_CARD_EN	0x0004
+#define S3C_HSMMC_CLOCK_INT_EN	0x00010000
 
 static int sdmmc_dev_num;
 /* If SD/MMC interface is working: return = 1 or not 0 */
@@ -100,7 +100,7 @@ static int check_sdmmc_op(unsigned int ch)
 	reg2 = readl(base_addr + S3C_HSMMC_CLKCON);
 
 	return !!(reg1 & (S3C_HSMMC_CMD_INHIBIT | S3C_HSMMC_DATA_INHIBIT)) ||
-	       (reg2 & (S3C_HSMMC_CLOCK_CARD_EN));
+	       (reg2 & (S3C_HSMMC_CLOCK_INT_EN));
 }
 
 /* Check all sdmmc controller */
